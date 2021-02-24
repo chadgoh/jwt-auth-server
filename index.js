@@ -1,8 +1,11 @@
 const express = require('express'); 
 const dotenv = require('dotenv'); 
 const jwt = require('jsonwebtoken'); 
+const cors = require('cors');
 
 const app = express(); 
+
+app.use(cors())
 
 // Set up Global configuration access 
 dotenv.config(); 
@@ -18,9 +21,11 @@ app.post("/user/generateToken", (req, res) => {
 	// Then generate JWT Token 
 
 	let jwtSecretKey = process.env.JWT_SECRET_KEY; 
+
+    //can use this data or even the username/pw
 	let data = { 
 		time: Date(), 
-		userId: 12, 
+		userId: 1, 
 	} 
 
 	const token = jwt.sign(data, jwtSecretKey); 
