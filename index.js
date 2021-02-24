@@ -11,21 +11,19 @@ const app = express();
 
 
 //this cors library helps mitigate the cors error, no need to know too much but if wanna read more > https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
+// so this is app (the express server) implementing the cors library
 app.use(cors())
 
 /* Set up Global configuration access 
 
 dotenv is a library that allows you to load variables from a .env file into the server's properties
-
 basically just allows you to instantiate variables in a secure manner, can go see what's inthe .env file of the project
-
-
 */
 dotenv.config(); 
 
 /* 
-let the variable PORT = an env variable called PORT if it exists, if not it'll default to 5000
-	 can try add a PORT variable in .env with another port number and it'll use that instead if you wanna check it out
+	let the variable PORT = an env variable called PORT if it exists, if not it'll default to 5000
+		can try add a PORT variable in .env with another port number and it'll use that instead if you wanna check it out
 */
 let PORT = process.env.PORT || 5000; 
 
