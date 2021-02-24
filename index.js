@@ -23,8 +23,10 @@ basically just allows you to instantiate variables in a secure manner, can go se
 */
 dotenv.config(); 
 
-// let the variable PORT = an env variable called PORT if it exists, if not it'll default to 5000
-// can try add a PORT variable in .env with another port number and it'll use that instead if you wanna check it out
+/* 
+let the variable PORT = an env variable called PORT if it exists, if not it'll default to 5000
+	 can try add a PORT variable in .env with another port number and it'll use that instead if you wanna check it out
+*/
 let PORT = process.env.PORT || 5000; 
 
 //starts the server on the PORT number, then write out to console to indicate the server is up and running
@@ -51,11 +53,11 @@ In general, the methods take in 2 arguments; a string, and another method
 
 // This method generates the JWT token
 app.post("/user/generateToken", (req, res) => { 
-	// Validate User Here so can check for username/password or smth
-		/*
-			so example if user credentials is sent with the request it will be validated here
+	/* Validate User Here so can check for username/password or smth
+		
+				so example if user credentials is sent with the request it will be validated here
 				e.g. check if user exists, check if password correct
-		*/
+	*/
 
 	// Then generate JWT Token 
 
@@ -63,7 +65,10 @@ app.post("/user/generateToken", (req, res) => {
 	// takes the secret key from the .env file
 	let jwtSecretKey = process.env.JWT_SECRET_KEY; 
 
-    //can use this data or even the username/pw to sign the token
+    /*
+	can use this data or even the username/pw to sign the token, you can even use a string to sign it like
+		let data = "hello"
+	*/
 	let data = { 
 		time: Date(), 
 		userId: 1, 
@@ -72,9 +77,10 @@ app.post("/user/generateToken", (req, res) => {
 	// uses the jwt library imported above to sign the token, dont need to know what its doing under the hood, but good to know how JWT works https://jwt.io/introduction
 	const token = jwt.sign(data, jwtSecretKey); 
 
-	// most response methods will be the last thing the endpoint does and typically sends some data back to whoever sent the request
 
-	/* in this case i just send the raw token back, but can really send anything,like so
+	/* 
+	most response methods will be the last thing the endpoint does and typically sends some data back to whoever sent the request
+	in this case i just send the raw token back, but can really send anything,like so
 		res.send(token, "extra random data", {"more data": "extra stuff"}); 
 	*/
 	res.send(token); 
@@ -91,9 +97,8 @@ app.get("/user/validateToken", (req, res) => {
 
 	try { 
 
-		// the token will come as a key-value pair looking like this 
 		/*
-
+			the token will come as a key-value pair looking like this 
 				authorization : Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0aW1lIjoiV2VkIEZlYiAyNCAyMDIxIDIxOjIzOjQ5IEdNVCswODAwIChTaW5nYXBvcmUgU3RhbmRhcmQgVGltZSkiLCJ1c2VySWQiOjEsImlhdCI6MTYxNDE3MzAyOX0.aDwnnWK-t2m3Q99Qd_MSIWS-BlAHrJCTdx-_shCRgLM
 
 
